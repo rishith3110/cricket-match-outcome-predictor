@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Predictor</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            text-align: center;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #ff4b2b;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #d4edda;
+            border-radius: 10px;
+        }
+
+        .bar-container {
+            width: 100%;
+            background: #eee;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .bar {
+            height: 10px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>🏏 Cricket Predictor</h2>
+
+<form method="POST">
+
+<select name="team1">
+    <option>India</option>
+    <option>Australia</option>
+    <option>England</option>
+    <option>Pakistan</option>
+</select>
+
+<select name="team2">
+    <option>Australia</option>
+    <option>India</option>
+    <option>England</option>
+    <option>Pakistan</option>
+</select>
+
+<select name="match_type">
+    <option>ODI</option>
+    <option>T20</option>
+    <option>Test</option>
+    <option>IPL</option>
+</select>
+
+<select name="toss">
+    <option>Team1</option>
+    <option>Team2</option>
+</select>
+
+<select name="venue">
+    <option>Mumbai</option>
+    <option>Delhi</option>
+</select>
+
+<button type="submit">Predict</button>
+
+</form>
+
+{% if result %}
+<div class="result">
+    Winner: <b>{{ result }}</b>
+
+    <div class="bar-container">
+        <div class="bar" style="width: {{ prob*100 }}%"></div>
+    </div>
+
+    <p>Confidence: {{ (prob*100)|round(2) }}%</p>
+</div>
+
+<script>
+confetti();
+</script>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
